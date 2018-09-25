@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b2e5f5"
+    tools:context=".activity.DataManagerActivity">
+
+    <LinearLayout
+        android:id="@+id/table_edit_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/settings_container"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <LinearLayout
+                android:id="@+id/main_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#8ccaec"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/select_table"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:lines="2"
+                        android:onClick="onOpenSelectTableDialog"
+                        android:paddingEnd="12dp"
+                        android:paddingStart="12dp"
+                        android:text="Выбрать таблицу" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/prev_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#8bc0de"
+                    android:onClick="onPrevPage"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/selector_arraw_back" />
+
+                <TextView
+                    android:id="@+id/range_rows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#8bc0de"
+                    android:gravity="center_vertical"
+                    android:padding="4dp"
+                    android:text="1-100"
+                    android:textColor="@android:color/black" />
+
+                <ImageView
+                    android:id="@+id/next_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#8bc0de"
+                    android:onClick="onNextPage"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/selector_arrow_forward" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#67c5cf"
+                    android:onClick="onOpenQuerySettings"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/settings" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/query_settings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#67c5cf"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="gone">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="12dp"
+                    android:background="#ef8782"
+                    android:gravity="center_vertical"
+                    android:onClick="onCustomQuery"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:text="SQL"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+
+                <ImageView
+                    android:id="@+id/add_row_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#8bdebd"
+                    android:onClick="onAddRow"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/add" />
+
+                <ImageView
+                    android:id="@+id/remove_all_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#ff002b"
+                    android:onClick="onClearAll"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/clear_all" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#67c5cf"
+                    android:onClick="onCloseQuerySettings"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:rotation="270"
+                    android:src="@drawable/arrow_to_close" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/textEditContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#e4e4e4"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/text_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="text"
+                    android:lines="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#c3f99c"
+                    android:onClick="applyTextEdit"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/check" />
+
+                <ImageView
+                    android:id="@+id/button_to_full_screen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#c0c26d"
+                    android:onClick="openFullScrenTextEditer"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/fullscreen" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#000"
+                    android:onClick="onCloseTextEdit"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/close"
+                    android:tint="#fff" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/table_helper"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#000"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+
+            <ImageView
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="12dp"
+                android:paddingStart="12dp"
+                android:onClick="onAddRow"
+                android:src="@drawable/add"
+                android:tint="#fff" />
+
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="12dp"
+                android:onClick="editRow"
+                android:paddingStart="12dp"
+                android:src="@drawable/edit"
+                android:tint="#fff" />
+
+            <ImageView
+                android:id="@+id/dublicate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="12dp"
+                android:onClick="dublicateRow"
+                android:paddingStart="12dp"
+                android:src="@drawable/dublicate"
+                android:tint="#fff" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="12dp"
+                android:paddingStart="12dp"
+                android:onClick="deleteRow"
+                android:src="@drawable/delete"
+                android:tint="#fff" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="hideDbHelper"
+                android:paddingEnd="12dp"
+                android:paddingStart="12dp"
+                android:rotation="270"
+                android:src="@drawable/arrow_to_close"
+                android:tint="#fff" />
+        </LinearLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/table_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="horizontal|vertical">
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal|vertical">
+
+                <TableLayout
+                    android:id="@+id/table_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                </TableLayout>
+            </HorizontalScrollView>
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#cacaca"
+            android:gravity="center"
+            android:textSize="20sp"
+            tools:text="Ошибка" />
+
+        <ImageView
+            android:id="@+id/close_error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:background="#ff002b"
+            android:onClick="closeError"
+            android:padding="12dp"
+            android:src="@drawable/close" />
+
+    </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#a6b7ed"
+        android:layout_gravity="end|bottom"
+        android:onClick="backToApp"
+        android:padding="12dp"
+        android:src="@drawable/exit" />
+</FrameLayout>
