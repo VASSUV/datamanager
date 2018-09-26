@@ -1,15 +1,15 @@
 apply plugin: 'com.android.library'
 
 
-def buildVersion = '28.0.0'
+def buildVersion = '27.0.0'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 26
     buildToolsVersion buildVersion
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0.0"
     }
