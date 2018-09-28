@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final TextView logsTxt = findViewById(R.id.logs);
-        logsTxt.setText( "" ); 
+        logsTxt.setText( "" );
     }
 
     public void runManager(View view) {
