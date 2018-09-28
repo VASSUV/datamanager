@@ -1,5 +1,6 @@
 package ru.mediasoft.datamanager.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +47,8 @@ public class DataManagerActivity extends AppCompatActivity implements DataManage
     private TextView rangeRowsTextView;
     private EditText textEdit;
     private ImageView buttonToFullScreen;
+
+    boolean errorIsVisible = false;
 
     public DataManagerPresenter presenter = new DataManagerPresenter();
 
@@ -150,21 +153,27 @@ public class DataManagerActivity extends AppCompatActivity implements DataManage
     public void showError(String errorText) {
         textError.setText(errorText);
         ((FrameLayout)textError.getParent()).setVisibility(View.VISIBLE);
+        errorIsVisible = true;
     }
 
     @Override
     public void hideError() {
         ((FrameLayout)textError.getParent()).setVisibility(View.GONE);
+        errorIsVisible = false;
     }
 
     public void hideDbHelper(View v) {
         hideDbHelper();
     }
 
-    public void backToApp(View v) {
-        finish();
+    public void backToApp(View view) {
+        backToApp();
     }
 
+    @Override
+    public void backToApp() {
+        finish();
+    }
 
     public void onAddRow(View v) {
         presenter.addRow();
@@ -247,7 +256,7 @@ public class DataManagerActivity extends AppCompatActivity implements DataManage
 
     @Override
     public boolean errorIsVisible() {
-        return textError.getVisibility() == View.VISIBLE;
+        return errorIsVisible;
     }
 
     @Override
@@ -267,7 +276,7 @@ public class DataManagerActivity extends AppCompatActivity implements DataManage
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        DataManager.init(this, DataManager.dbPath);
+        DataManager.init(this);
     }
 
     @Override
@@ -279,6 +288,8 @@ public class DataManagerActivity extends AppCompatActivity implements DataManage
             hideTableSettings();
             hideProgress();
             presenter.updateTable();
+            presenter.updateTables();
+            presenter.normalShowRange();
         } else if (!presenter.onBackPressed())
             super.onBackPressed();
     }
@@ -332,5 +343,16 @@ public class DataManagerActivity extends AppCompatActivity implements DataManage
     @NonNull
     private NestedScrollView.OnScrollChangeListener getScrollListener() {
         return (nestedScrollView, i, i1, i2, i3) -> tableLayout.getChildAt(0).setY(i1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        presenter.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

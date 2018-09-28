@@ -1,5 +1,6 @@
 package ru.mediasoft.datamanager.activity;
 
+import android.content.Intent;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -35,4 +36,8 @@ public interface DataManagerView {
     boolean errorIsVisible();
 
     void openEditRowFragment(String tableName, String rowId, boolean isAdd);
+
+    void backToApp();
+
+    void startActivityForResult(Intent intent, int requestCode);
 }

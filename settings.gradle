@@ -1,1 +1,1 @@
-include ':datamanager'
+include ':datamanager', ':example'

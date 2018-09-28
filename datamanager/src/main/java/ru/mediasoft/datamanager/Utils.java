@@ -25,13 +25,12 @@ public class Utils {
     private static Drawable selectbaleDrawable;
 
     public static String pathToFullPath(Context context, String dbPath) {
-        String path;
-        if (Build.VERSION.SDK_INT >= 17) {
-            path = context.getApplicationInfo().dataDir + "/databases/" + dbPath;
-        } else {
-            path = "/data/data/" + context.getPackageName() + "/databases/" + dbPath;
-        }
-        return path;
+        return !dbPath.contains("/") ? getDataBaseDirectoryPath(context) + dbPath : dbPath;
+    }
+
+    @NonNull
+    public static String getDataBaseDirectoryPath(Context context) {
+        return Build.VERSION.SDK_INT >= 17 ? context.getApplicationInfo().dataDir + "/databases/"  : "/data/data/" + context.getPackageName() + "/databases/";
     }
 
     public static TableRow[] reViewTable(ViewGroup tableLayout,

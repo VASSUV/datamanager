@@ -3,10 +3,11 @@ package ru.mediasoft.datamanager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-class SharedData {
+public class SharedData {
     static String NAME = "DataManagerSharedPreferences";
     static String FLOATING_X = "FLOATING_X";
     static String FLOATING_Y = "FLOATING_Y";
+    static String DB_PATH = "DB_PATH";
 
     SharedPreferences sharedPreferences;
 
@@ -25,5 +26,13 @@ class SharedData {
 
     public int getFloatingButtonY() {
         return sharedPreferences.getInt(FLOATING_Y, -1);
+    }
+
+    public void saveDbPath(String dbPath) {
+        sharedPreferences.edit().putString(DB_PATH, dbPath).apply();
+
+    }
+    public String getDbPath() {
+        return sharedPreferences.getString(DB_PATH, "");
     }
 }

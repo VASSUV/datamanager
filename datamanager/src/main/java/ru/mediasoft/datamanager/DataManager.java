@@ -6,11 +6,7 @@ import android.net.Uri;
 import android.provider.Settings;
 
 public class DataManager {
-
-    public static String dbPath = null;
-
-    public static void init(Activity activity, String dbPath) {
-        DataManager.dbPath = dbPath;
+     public static void init(Activity activity) {
         Intent intent = new Intent(activity, FloatingDBButtonService.class);
         activity.startService(intent);
     }

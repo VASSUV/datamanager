@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.mediasoft.datamanager">
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application>
         <activity
             android:name=".activity.DataManagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/sqlite_manager_app_name"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/SqliteManager.Theme" />
+            android:theme="@style/SqliteManager.Theme"
+            android:windowSoftInputMode="adjustResize" />
 
         <service android:name="ru.mediasoft.datamanager.FloatingDBButtonService" />
     </application>

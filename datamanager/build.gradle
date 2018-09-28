@@ -1,15 +1,15 @@
 apply plugin: 'com.android.library'
 
 
-def buildVersion = '28.0.0'
+def buildVersion = '27.0.0'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion buildVersion
+    compileSdkVersion 26
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0.0"
     }
@@ -18,10 +18,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-
-        debug {
-
         }
     }
 
@@ -37,16 +33,3 @@ dependencies {
     implementation 'com.android.support:support-v4:' + buildVersion
     implementation 'com.android.support:recyclerview-v7:' + buildVersion
 }
-
-//task deleteJar(type: Delete) {
-//    delete 'libs/jars/datamanager.jar'
-//}
-//
-//task createJar(type: Copy) {
-//    from('build/intermediates/bundles/release/')
-//    into('libs/jars/')
-//    include('classes.jar')
-//    rename('classes.jar', 'datamanager.jar')
-//}
-//
-//createJar.dependsOn(deleteJar, build)

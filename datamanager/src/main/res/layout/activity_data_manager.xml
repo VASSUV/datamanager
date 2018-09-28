@@ -59,6 +59,7 @@
                     android:onClick="onPrevPage"
                     android:paddingEnd="12dp"
                     android:paddingStart="12dp"
+                    android:enabled="false"
                     android:src="@drawable/selector_arraw_back" />
 
                 <TextView
@@ -76,6 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="#8bc0de"
+                    android:enabled="false"
                     android:onClick="onNextPage"
                     android:paddingEnd="12dp"
                     android:paddingStart="12dp"

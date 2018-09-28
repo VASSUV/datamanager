@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/datamanager.iml" filepath="$PROJECT_DIR$/datamanager.iml" />
       <module fileurl="file://$PROJECT_DIR$/datamanager/datamanager-datamanager.iml" filepath="$PROJECT_DIR$/datamanager/datamanager-datamanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
     </modules>
   </component>
 </project>

@@ -15,6 +15,10 @@ public class DbHelper {
         db = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
+    public boolean isInit() {
+        return  db != null && db.isOpen();
+    }
+
     public String[] getTableNames() {
         final Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
         final String[] tables = new String[cursor.getCount()];
@@ -61,7 +65,7 @@ public class DbHelper {
         sqlQuery.append("SELECT ");
 
         for (int i = 0; i < columns.size(); i++) {
-            sqlQuery.append(columns.get(i).name);
+            sqlQuery.append('`').append(columns.get(i).name).append('`');
             if (i != columns.size() - 1) {
                 sqlQuery.append(",");
             }
@@ -117,7 +121,7 @@ public class DbHelper {
         for (int i = 1; i < columns.size(); i++) {
             if (i != 1)
                 sqlQuery.append(",");
-            sqlQuery.append(columns.get(i).name);
+            sqlQuery.append('`').append(columns.get(i).name).append('`');
         }
         sqlQuery.append(") VALUES (");
         for (int i = 1; i < values.size(); i++) {
@@ -132,7 +136,7 @@ public class DbHelper {
     private String getValue(String value, Column column) {
         return (column.isNotNull && value == null) ? column.defaultValue
                 : (value == null ? "NULL"
-                : (column.type.startsWith("TEXT") || column.type.startsWith("VARCHAR")) ? ("'" + value + "'")
+                : column.type.isEmpty() || (column.type.startsWith("TEXT") || column.type.startsWith("VARCHAR")) ? ("'" + value + "'")
                 : value);
     }
 
@@ -142,7 +146,7 @@ public class DbHelper {
         for (int i = 1; i < columns.size(); i++) {
             if (i != 1)
                 sqlQuery.append(",");
-            sqlQuery.append(columns.get(i).name).append("=").append(getValue(values.get(i), columns.get(i)));
+            sqlQuery.append('`').append(columns.get(i).name).append('`').append("=").append(getValue(values.get(i), columns.get(i)));
         }
         sqlQuery.append(" WHERE ").append(columns.get(0).name).append("=").append(getValue(values.get(0), columns.get(0)));
         db.execSQL(sqlQuery.toString());
@@ -157,5 +161,14 @@ public class DbHelper {
         final Column column = getPrimaryKeyForTable(table);
         sqlQuery.append("DELETE FROM ").append(table).append(" WHERE ").append(column.name).append("=").append(rowId);
         db.execSQL(sqlQuery.toString());
+    }
+
+    public void destroy() {
+        if (db != null) {
+            if (db.isOpen()) {
+                db.close();
+                db = null;
+            }
+        }
     }
 }
